@@ -54,7 +54,9 @@ h2 {
 	border-width: 0;
 }
 
-#turn {}
+#turn {
+	color: #f2c14e;
+}
 
 .game-square {
 	border-color: lightgrey;
