@@ -3,8 +3,10 @@ let gameBoxes = Array.from(document.getElementsByClassName("game-square"));
 let topText = document.getElementById("title");
 const playerTurn = document.getElementById("turn");
 const play1score = document.getElementById("scoreboard-x");
+const play2score = document.getElementById("scoreboard-o");
 
-let scoreboard1= 0; 
+let scoreboardX= parseInt(localStorage.getItem('scoreboardX')) || 0;
+let scoreboardO= parseInt(localStorage.getItem('scoreboardO')) || 0;
 
 const O_Player = "O";
 const X_Player = "X";
@@ -35,7 +37,7 @@ function boxClick(e)
         if(playerWon() !==false)
         {
             topText.innerText = currentPlayer + " Player Has Won!";
-
+            updateScores(currentPlayer);
             return;
             
         }
@@ -76,6 +78,21 @@ function playerWon()
         }
     }
     return false;
+}
+
+function updateScores(winner) 
+{
+    if (winner === "X")
+    {
+        scoreboardX++;
+        play1score.innerText = scoreboardX;
+        localStorage.setItem("scoreboardX", scoreboardX);
+    } else if (winner === "O")
+    {
+        scoreboardO++;
+        play2score.innerText = scoreboardO;
+        localStorage.setItem("scoreboardO", scoreboardO);
+    }
 }
 
 
