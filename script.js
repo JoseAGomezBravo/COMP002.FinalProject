@@ -2,48 +2,50 @@ let restartButton = document.getElementById("button-play-again");
 let gameBoxes = Array.from(document.getElementsByClassName("game-square"));
 let topText = document.getElementById("title");
 const playerTurn = document.getElementById("turn");
+const play1score = document.getElementById("scoreboard-x");
 
-const O_Player = "O"
-const X_Player = "X"
-let currentPlayer = X_Player
+let scoreboard1= 0; 
+
+const O_Player = "O";
+const X_Player = "X";
+let currentPlayer = X_Player;
 
 
-let boxSpaces = Array(9).fill(null)
+let boxSpaces = Array(9).fill(null);
 
-let count_plays = 0
+let count_plays = 0;
 
 
 const gameStart = () => 
 {
-    gameBoxes.forEach(box => box.addEventListener("click", boxClick))
+    gameBoxes.forEach(box => box.addEventListener("click", boxClick));
 }
 
 function boxClick(e)
 {
-    const id = e.target.id
+    const id = e.target.id;
 
     if(!boxSpaces[id] && count_plays < 9)
     {
-        boxSpaces[id] = currentPlayer
-        e.target.innerText = currentPlayer
+        boxSpaces[id] = currentPlayer;
+        e.target.innerText = currentPlayer;
 
         playerTurn.innerText = currentPlayer;
 
         if(playerWon() !==false)
         {
-            topText.innerText = currentPlayer + " Player Has Won!"
+            topText.innerText = currentPlayer + " Player Has Won!";
 
-
-            return
+            return;
             
         }
-        count_plays++
-        currentPlayer = currentPlayer == X_Player ? O_Player : X_Player
+        count_plays++;
+        currentPlayer = currentPlayer == X_Player ? O_Player : X_Player;
     }
 
     if(count_plays === 9)
     {
-        topText.innerHTML = "Draw Game!"
+        topText.innerHTML = "Draw Game!";
     }
 
     
@@ -66,33 +68,33 @@ const gameWin = [
 function playerWon()
 {
     for (const condition of gameWin) {
-        let [a,b,c] = condition
+        let [a,b,c] = condition;
 
         if(boxSpaces[a] && (boxSpaces[a] == boxSpaces[b] && boxSpaces[a] == boxSpaces[c])) 
         {
-            return [a,b,c]
+            return [a,b,c];
         }
     }
-    return false
+    return false;
 }
 
 
-restartButton.addEventListener("click", restart)
+restartButton.addEventListener("click", restart);
 
 function restart()
 {
-    boxSpaces.fill(null)
-    count_plays = 0
+    boxSpaces.fill(null);
+    count_plays = 0;
     gameBoxes.forEach( box =>
         {
-            box.innerText =""
-            box.style.backgroundColor=""
-        })
+            box.innerText ="";
+            box.style.backgroundColor="";
+        });
 
-        currentPlayer = X_Player
+        currentPlayer = X_Player;
 
-        topText.innerHTML = "Tic-Tac-Toe"
+        topText.innerHTML = "Tic-Tac-Toe";
 }
 
-gameStart()
+gameStart();
 
