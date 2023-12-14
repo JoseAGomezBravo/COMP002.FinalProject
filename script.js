@@ -25,8 +25,39 @@ function boxClick(e)
         boxSpaces[id] = currentPlayer
         e.target.innerText = currentPlayer
 
+        if(playerWon())
+        {
+            topText = "${currentPlayer} has won!"
+        }
+
         currentPlayer = currentPlayer == X_Player ? O_Player : X_Player
     }
+}
+
+
+
+
+
+function playerWon()
+{
+
+}
+
+
+restartButton.addEventListener("click", restart)
+
+function restart()
+{
+    boxSpaces.fill(null)
+
+    gameBoxes.forEach( box =>
+        {
+            box.innerText =""
+        })
+
+        currentPlayer = X_Player
+
+        topText = "Tic-Tac-Toe"
 }
 
 gameStart()
